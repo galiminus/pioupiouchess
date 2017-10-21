@@ -1,24 +1,26 @@
-# README
+# Pioupiouchess
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+It's a chess game you can play on Twitter. You can start a game or join any game you can find and play against your followers in a tree of chess games.
 
-Things you may want to cover:
+## Installation
 
-* Ruby version
+```
+bundle install
+bundle exec rake db:create db:schema:load db:seed
+```
 
-* System dependencies
+## Configuration
 
-* Configuration
+In `config/application.yml`:
 
-* Database creation
+```
+development:
+  TWITTER_CLIENT_ID: XXX
+  TWITTER_CLIENT_SECRET: XXX
+  TWITTER_CONSUMER_KEY: XXX
+  TWITTER_CONSUMER_SECRET: XXX
+  DOMAIN: "localhost:3000"
+  NO_TWITTER: "true"
+```
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+The NO_TWITTER option is useful for testing: it will show you the next board instead of posting on Twitter.
