@@ -2,6 +2,8 @@
 
 It's a chess game you can play on Twitter. You can start a game or join any game you can find and play against your followers in a tree of chess games.
 
+Start a new game at https://pioupiouchess.phorque.it or play against me here https://twitter.com/ph0rqu3/status/921676233267646465
+
 ## Installation
 
 ```
