@@ -1,0 +1,32 @@
+= cache @parent do
+  section.hero.is-primary.is-small
+    .hero-body
+      .container
+        .level
+          .level-left
+            .level-item
+              div
+                p.title
+                  - if @parent.chess_game.over?
+                    | Game over
+                  - else
+                    = "#{@parent.chess_game.active_player.capitalize}'s turn"
+                p
+                  = game_status(@parent)
+          - if @parent.chess_game.moves.size > 0 && !@parent.chess_game.over?
+            .level-right
+              .level-item
+                = button_to "Resign", game_resign_path(game_id: @parent.id), method: :put, class: "button is-primary is-inverted is-outlined"
+  .container
+    .section
+      = form_for Game.new do |f|
+        .pageloader
+        = f.hidden_field :parent_id, value: @parent.id
+        = f.hidden_field :move
+        .chessboard data-over=@parent.chess_game.over?.to_s
+          - game_positions.each.with_index do |position, index|
+            div class="chessboard-position #{(index - index / Game::BOARD_SIZE).odd? ? 'black' : 'white'}" data-piece=game_piece_at(@parent, position) data-position=position data-moves=game_moves_at(@parent, position).to_json
+              img.chessboard-piece.is-unselectable src=image_path(game_piece_image(@parent, position))
+  .container.has-text-centered
+    = link_to new_game_path, class: "button is-primary" do
+      | Start a new game

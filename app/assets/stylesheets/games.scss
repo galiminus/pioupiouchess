@@ -1,0 +1,80 @@
+// Place all the styles related to the games controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+$white-background: #fff;
+$black-background: #888;
+$border-size: 3px;
+
+.chessboard {
+  width: 70%;
+  max-width: 70vh;
+  @include mobile {
+    width: 100%;
+    max-width: 100vh;
+  }
+
+  line-height: 0;
+  border-top: 1px solid #333;
+  border-left: 1px solid #333;
+  margin-left: auto;
+  margin-right: auto;
+  .chessboard-position {
+    width: 12.5%;
+    display: inline-block;
+    border-bottom: 1px solid #333;
+    border-right: 1px solid #333;
+    &:after {
+      content: "";
+      display: block;
+    }
+
+    &.white {
+      background: $white-background;
+    }
+    &.black {
+      background: $black-background;
+    }
+
+    &.white .chessboard-piece {
+      border-color: $white-background;
+    }
+    &.black .chessboard-piece {
+      border-color: $black-background;
+    }
+
+    &[data-hover="true"] {
+      // background: #ccc;
+      &.white .chessboard-piece {
+        border: $border-size solid $white-background;
+      }
+      &.black .chessboard-piece {
+        border: $border-size solid $black-background;
+      }
+
+      cursor: pointer;
+    }
+    &[data-possible-move="true"], &[data-selected="true"] {
+      &.white .chessboard-piece {
+        border: $border-size dashed $black-background;
+      }
+      &.black .chessboard-piece {
+        border: $border-size dashed $white-background;
+      }
+      cursor: pointer;
+    }
+    &[data-possible-move="true"]:hover .chessboard-piece {
+      border-style: solid;
+      border-width: 8px;
+    }
+
+    .chessboard-piece {
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+      width: 100%;
+      height: 100%;
+      transition: border 0.1s;
+      -webkit-user-drag: none;
+    }
+  }
+}
